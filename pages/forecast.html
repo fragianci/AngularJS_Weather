@@ -1,0 +1,26 @@
+<h3>
+  Forecast of {{ city }} of 1 hour.
+</h3>
+
+<div>
+  Date: {{ convertToDate(weatherResult.current.dt) | date: 'd-MMM-y' }}.
+  Current temperature: {{ convertToCelsius(weatherResult.current.temp) }}°
+</div>
+
+<div>
+  Daytime situation: {{ weatherResult.current.weather[0].main }}
+</div>
+
+Choose the number of forecasts to watch:
+<input type="text" ng-model="numForecasts">
+
+<div ng-repeat="(index, weather) in weatherResult.minutely" style="padding-top: 10px;">
+  <div class="row" ng-if="index < numForecasts">
+    <div class="col-md-12">
+      <single-forecast 
+      weather-object="weather"
+      convert-to-date-function="convertToDate(weather.dt)"
+      ></single-forecast>
+    </div>
+  </div>
+</div>
